@@ -1,1 +1,4 @@
+<button class="dark-mode-toggle" (click)="toggleDarkMode()">
+    <img class="dark-mode-toggle" [src]="(themeService.darkMode$ | async) ? 'assets/dark.svg' : 'assets/light.svg'">
+</button>
 <router-outlet></router-outlet>

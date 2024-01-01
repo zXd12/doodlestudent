@@ -13,6 +13,10 @@
     color: #303030;
     font-family: 'Montserrat', 'Open Sans', 'Roboto', sans-serif;
   }
+
+  body.dark-mode {
+    background-color: #1e2122;
+  }
   
   .Btn-primary {
     background-color: #4D3DF7;

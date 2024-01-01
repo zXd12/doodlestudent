@@ -5,6 +5,7 @@ import { PollService } from '../poll-service.service';
 import { Poll, User, PollChoice, PollCommentElement, ChoiceUser } from '../model/model';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { ThemeService } from '../theme-service.service';
 
 @Component({
   selector: 'app-admin-poll',
@@ -15,7 +16,7 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class AdminPollComponent implements OnInit {
 
-  constructor(public messageService: MessageService, private actRoute: ActivatedRoute, private pollService: PollService) { }
+  constructor(public messageService: MessageService, private actRoute: ActivatedRoute, private pollService: PollService, public themeService: ThemeService) { }
   slugid: string;
   poll: Poll;
   events: EventInput[] = [];
@@ -28,13 +29,13 @@ export class AdminPollComponent implements OnInit {
       this.slugid = params.get('slugadminid');
       this.pollService.getPollBySlugAdminId(this.slugid).subscribe(p => {
         this.poll = p;
-        if (p != null){
+        if (p != null) {
           this.pollService.getComentsBySlugId(this.poll?.slug).subscribe(cs => this.comments = cs);
         }
         this.uniqueUsers.splice(0, this.uniqueUsers.length);
         this.poll.pollChoices.forEach(pc => {
           pc.users.forEach(user => {
-            if (this.uniqueUsers.filter(us => us.id === user.id).length  === 0 ){
+            if (this.uniqueUsers.filter(us => us.id === user.id).length === 0) {
               this.uniqueUsers.push(user);
               this.userChoices.set(user.id, []);
             }
@@ -57,7 +58,7 @@ export class AdminPollComponent implements OnInit {
         });
         this.poll.pollChoices.forEach(pc => {
           pc.users.forEach(us => {
-              this.userChoices.get(us.id).push(pc);
+            this.userChoices.get(us.id).push(pc);
           });
         });
 
@@ -68,21 +69,23 @@ export class AdminPollComponent implements OnInit {
   }
 
 
-  selectEvent($event: any, event: EventInput): void{
+  selectEvent($event: any, event: EventInput): void {
     this.pollService.selectEvent(event.extendedProps.choiceid).subscribe(e => {
       this.messageService.add({
         severity: 'success',
         summary: 'Données enregistrées',
-        detail: 'Le sondage est maintenant close'}
-        );
+        detail: 'Le sondage est maintenant close'
+      }
+      );
       this.poll.clos = true;
     }, (error) => {
       this.messageService.add(
         {
           severity: 'warn',
           summary: 'Sélection de cette date impossible',
-          detail: 'Le sondage n\'a pu être clos'}
-          );
+          detail: 'Le sondage n\'a pu être clos'
+        }
+      );
     });
 
     return;

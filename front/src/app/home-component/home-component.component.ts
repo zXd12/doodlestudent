@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CardSmallComponentComponent } from '../card-small-component/card-small-component.component';
 import {Card} from './Card';
+import { ThemeService } from '../theme-service.service';
+
 @Component({
   selector: 'app-home-component',
   templateUrl: './home-component.component.html',
@@ -10,7 +12,7 @@ import {Card} from './Card';
 })
 export class HomeComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public themeService: ThemeService) { }
 
 
   cards: Card[] = [];

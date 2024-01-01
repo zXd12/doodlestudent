@@ -11,6 +11,7 @@ import { ModalPollClosComponent } from '../modal-poll-clos/modal-poll-clos.compo
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { ThemeService } from '../theme-service.service';
 
 @Component({
   selector: 'app-answer-poll',
@@ -25,7 +26,8 @@ export class AnswerPollComponent implements OnInit {
     // tslint:disable-next-line:align
     private actRoute: ActivatedRoute, private pollService: PollService,
     // tslint:disable-next-line:align
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    public themeService: ThemeService) { }
   slugid: string;
   poll: Poll;
   calendarortableoption: any[];

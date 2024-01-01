@@ -1,7 +1,7 @@
 <div class="Container">
 
 
-  <img src="assets/flat_logo.png" alt="Logo Simba" height="50px" [ngStyle]="{ 'marginBottom': '1rem' }" />
+  <img id="flat_logo" [src]="(themeService.darkMode$ | async) ? 'assets/flat_logo_dark.png' : 'assets/flat_logo.png'" alt="Logo Simba" height="50px" [ngStyle]="{ 'marginBottom': '1rem' }" />
 
 <!--    { isModalOpened &&
       <div className="modal" onClick={() => setIsModalOpened(false)}>

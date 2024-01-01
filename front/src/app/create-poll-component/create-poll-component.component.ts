@@ -9,6 +9,7 @@ import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { ThemeService } from '../theme-service.service';
 
 /*FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -79,7 +80,7 @@ export class CreatePollComponentComponent implements OnInit {
   submitted = false;
 
 
-  constructor(public messageService: MessageService, public pollService: PollService, private actRoute: ActivatedRoute) { }
+  constructor(public messageService: MessageService, public pollService: PollService, private actRoute: ActivatedRoute, public themeService: ThemeService) { }
 
   ngOnInit(): void {
     this.poll.pollChoices = [];
@@ -123,7 +124,7 @@ export class CreatePollComponentComponent implements OnInit {
           id: this.getUniqueId(8),
 
           extendedProps: {
-//            tmpId: this.getUniqueId(8)
+            //            tmpId: this.getUniqueId(8)
           },
         };
         calendarApi.addEvent(evt, true);
@@ -157,17 +158,17 @@ export class CreatePollComponentComponent implements OnInit {
       },
       eventClick: (info) => {
         const evt = this.events.filter(e => e.id === info.event.id).pop();
-        if (evt != null){
-        const index = this.events.indexOf(evt);
-        if (index > -1) {
-          this.events.splice(index, 1);
+        if (evt != null) {
+          const index = this.events.indexOf(evt);
+          if (index > -1) {
+            this.events.splice(index, 1);
+          }
+          const index1 = this.allevents.indexOf(evt);
+          if (index1 > -1) {
+            this.allevents.splice(index1, 1);
+          }
+          info.event.remove();
         }
-        const index1 = this.allevents.indexOf(evt);
-        if (index1 > -1) {
-          this.allevents.splice(index1, 1);
-        }
-        info.event.remove();
-      }
 
       },
       validRange: {
@@ -359,7 +360,7 @@ export class CreatePollComponentComponent implements OnInit {
         evt1.backgroundColor = 'red';
         evt1.extendedProps.selected = false;
         evt2.setProp('backgroundColor', 'red');
-//        this.poll.pollChoices.filter(pc => pc.id === evt1.extendedProps.choiceid)[0].users.push({ id: -1 });
+        //        this.poll.pollChoices.filter(pc => pc.id === evt1.extendedProps.choiceid)[0].users.push({ id: -1 });
       });
       unselected.forEach(e => {
         const evt1 = this.events.filter(ev => ev.extendedProps.choiceid === e)[0];
