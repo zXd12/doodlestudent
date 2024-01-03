@@ -14,6 +14,7 @@ export class ThemeService {
 
   constructor() {
     this.darkMode.next(localStorage.getItem('dark-mode') === 'true');
+    this.toggleTheme(localStorage.getItem('dark-mode') === 'true' ? 'dark' : 'light');
   }
 
   toggleDarkMode() {
