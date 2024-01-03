@@ -21,7 +21,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/themes"
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.css",
@@ -127,5 +128,8 @@
         }
       }
     }},
-  "defaultProject": "tlcfront"
+  "defaultProject": "tlcfront",
+  "cli": {
+    "analytics": false
+  }
 }
